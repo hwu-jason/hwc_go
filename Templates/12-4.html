@@ -1,0 +1,15 @@
+<h1>{{.PageTitle}}<h1>
+	<style type="text/css">
+	  .done {
+	    text-decoration:line-through;
+	    background-color: #d8da3d }
+	</style>
+<ul>
+    {{range .Todos}}
+        {{if .Done}}
+            <li class="done">{{.Title}}</li>
+        {{else}}
+            <li>{{.Title}}</li>
+        {{end}}
+    {{end}}
+</ul>
