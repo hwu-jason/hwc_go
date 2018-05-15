@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
 	"html/template"
 	"net/http"
 )
@@ -28,10 +28,10 @@ func main() {
 		}
 
 		// do something with details
-		// _ = details
+		_ = details
 		// fmt.Println("email: %s subject: %s Message: %s \n", details.Email, details.Subject, details.Message)
 
-		tmpl.Execute(w, struct{ Success bool ,email string}{true,details.Email})
+		tmpl.Execute(w, struct{ Success bool }{true})
 	})
 
 	http.ListenAndServe(":8000", nil)
