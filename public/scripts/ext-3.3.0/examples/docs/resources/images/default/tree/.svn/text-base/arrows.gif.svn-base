@@ -1,0 +1,3 @@
+Log_Path=/var/log/WatchDog/
+Log_Size=100KB
+getWebServerStatus;getWebServerStatus;/opt/bin/resetWeb.sh;0;1;3;0;10;
