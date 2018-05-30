@@ -1,0 +1,7 @@
+﻿;!@Install@!UTF-8!
+
+Title="HWU System"
+BeginPrompt="Install HWU Console System？"
+RunProgram="install.exe"
+
+;!@InstallEnd@!
