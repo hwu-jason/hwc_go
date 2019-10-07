@@ -1,6 +1,6 @@
 package main
 
-//go:generate go build -ldflags -H=windowsgui  -o C:\Users\jason\go\tmp\hwc_go\main.exe  C:\Users\jason\go\tmp\hwc_go\13-3.go
+//go:generate go build -ldflags -H=windowsgui  -o C:\Users\jason\go\src\hwu_go\main.exe  C:\Users\jason\go\src\hwu_go\13-1.go
 //go:generate go build  install.go
 //go:generate go run zip.go
 
@@ -17,11 +17,10 @@ import (
 
 func main() {
 
-	main_path := "C:\\Users\\jason\\go\\tmp\\"
-	project_path := "hwc_go\\"
+	main_path := "C:\\Users\\jason\\go\\src\\"
+	project_path := "hwu_go\\"
 
 	public_path := "public"
-	Templates_path := "Templates"
 	bin_path := "main.exe"
 	star_path := "start.lnk"
 	bat_path := "start_exe.bat"
@@ -31,8 +30,8 @@ func main() {
 		main_path + project_path + bin_path,
 		main_path + project_path + public_path,
 		main_path + project_path + star_path,
-		main_path + project_path + bat_path,
-		main_path + project_path + Templates_path}
+		main_path + project_path + bat_path}
+
 	output := "hwu"
 
 	err := ZipFiles(output, files)
