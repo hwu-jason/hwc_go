@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.js"></script>
+		<script>
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
+			camera.position.set( 0, 0, 100 );
+			camera.lookAt( 0, 0, 0 );
+
+			var scene = new THREE.Scene();
+			var radius = 10;
+			var segments =32;
+			var thetaStart =0;
+
+			var geometry = new THREE.CircleGeometry( radius, segments ,thetaStart,Math.PI*2);
+		    var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+		    var circle = new THREE.Mesh( geometry, material );
+		    scene.add( circle );
+		  
+		    var Boxgeometry = new THREE.BoxBufferGeometry( 1, 8, 0 );
+			var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+			var cube = new THREE.Mesh( Boxgeometry, material );
+			cube.position.set(0, 4, 0);
+			cube.rotateZ(THREE.Math.degToRad(0))
+
+
+			pivot = new THREE.Group();
+		    pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
+		    cube.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
+		    pivot.add( cube );
+		    scene.add( pivot );
+
+			// scene.add( new THREE.AxesHelper() );
+			renderer.render( scene, camera );			
+
+		    render();
+
+		   
+		    function render(){		     
+		        requestAnimationFrame(render);
+		        pivot.rotation.z-=0.01;
+		        renderer.render(scene, camera);
+		        // sleep(0.3);
+		    }
+
+		    function sleep(sec) {
+				var time = new Date().getTime();
+				while(new Date().getTime() - time < sec * 1000);
+			}
+		</script>
+	</body>
+</html>

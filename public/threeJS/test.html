@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.js"></script>
+		<script>
+			var camera, scene, renderer;
+			var mesh, pivot;
+
+			init();
+			animate();
+
+			function init() {
+
+			    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+			    camera.position.z = 1;
+
+			    scene = new THREE.Scene();
+
+			    var geometry = new THREE.PlaneGeometry( 0.2, 0.5, 0.2 );
+			    var material = new THREE.MeshNormalMaterial();
+
+			    mesh = new THREE.Mesh( geometry, material );
+			    mesh.position.set(0, -.25, 0);
+			    scene.add( mesh );
+			    
+			    var geo2 = geometry.clone();
+			    geo2.rotateZ(THREE.Math.degToRad(90)); // ROTATE GEOMETRY SO IT'S IN THE CORRECT ORIENTATION
+			    var mesh2 = new THREE.Mesh( geo2, material );
+			    mesh2.position.set( 0, .25, 0 ); // MOVE THE GEOMOETRY UP BY HALF SO PIVOT IS AT THE BOTTOM OF THE GEO
+			    mesh2.rotation.set(0, 0, Math.PI / 2);
+			    mesh.add(mesh2);
+			    
+			    pivot = new THREE.Group();
+			    pivot.position.set( 0.0, 0.25, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
+			    mesh.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
+			    pivot.add( mesh2 );
+
+
+			    renderer = new THREE.WebGLRenderer( { antialias: true } );
+			    renderer.setSize( window.innerWidth, window.innerHeight );
+			    document.body.appendChild( renderer.domElement );
+
+			}
+
+			function animate() {
+
+			    requestAnimationFrame( animate );
+
+					pivot.rotation.z += 0.01;
+					
+			    renderer.render( scene, camera );
+
+			}
+		</script>
+	</body>
+</html>
